@@ -1,0 +1,49 @@
+name: flutter_ci
+
+on:
+  pull_request:
+
+permissions:
+  checks: write    # テストレポーターのために必要
+  contents: read   # checkoutのために必要
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.2'
+          channel: 'stable' 
+
+      - name: Create .env file
+        run: |
+          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" > .env
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze project source
+        run: flutter analyze
+
+      - name: Run tests
+        run: |
+          mkdir -p test-results
+          flutter test --machine > test-results/test_report.json || true
+          flutter test --coverage || true
+
+      - name: Report test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: 'flutter test'
+          path: 'test-results/test_report.json'  # パスを修正
+          reporter: 'flutter-json'
+          fail-on-error: 'false'  # まずはfalseに設定
+          token: ${{ secrets.GITHUB_TOKEN }}
