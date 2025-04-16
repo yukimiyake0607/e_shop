@@ -8,4 +8,4 @@ jobs:
     - uses: subosito/flutter-action@v2.8.0
     - name: Run Flutter tests
       run: flutter test
-      working-directory: ./e_shop
+      working-directory: ./
