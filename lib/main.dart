@@ -1,3 +1,5 @@
+import 'package:e_shop/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:e_shop/src/app_bootstrap_fakes.dart';
 import 'package:e_shop/src/app_bootstrap.dart';
@@ -6,6 +8,8 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // turn off the # in the URLs on the web
   usePathUrlStrategy();
   // create an app bootstrap instance
