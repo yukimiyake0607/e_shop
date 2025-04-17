@@ -1,7 +1,7 @@
 import 'package:e_shop/firebase_options.dart';
+import 'package:e_shop/src/app_bootstrap_firebase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:e_shop/src/app_bootstrap_fakes.dart';
 import 'package:e_shop/src/app_bootstrap.dart';
 // ignore:depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -15,7 +15,7 @@ void main() async {
   // create an app bootstrap instance
   final appBootstrap = AppBootstrap();
   // create a container configured with all the "fake" repositories
-  final container = await createFakesProviderContainer();
+  final container = await createFirebaseProviderContainer();
   // use the container above to create the root widget
   final root = appBootstrap.createRootWidget(container: container);
   // start the app
