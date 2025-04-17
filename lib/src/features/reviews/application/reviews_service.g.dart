@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fake_reviews_service.dart';
+part of 'reviews_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$reviewsServiceHash() => r'00b452c8017376fabd7c54cfe123830d6960877f';
+String _$reviewsServiceHash() => r'5978f80723f9549750dc8c990b769ce52a61d619';
 
 /// See also [reviewsService].
 @ProviderFor(reviewsService)
-final reviewsServiceProvider = AutoDisposeProvider<FakeReviewsService>.internal(
+final reviewsServiceProvider = AutoDisposeProvider<ReviewsService>.internal(
   reviewsService,
   name: r'reviewsServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,7 @@ final reviewsServiceProvider = AutoDisposeProvider<FakeReviewsService>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ReviewsServiceRef = AutoDisposeProviderRef<FakeReviewsService>;
+typedef ReviewsServiceRef = AutoDisposeProviderRef<ReviewsService>;
 String _$userReviewFutureHash() => r'ffd3abe0878704159bb7a63e6cb46377c9054a38';
 
 /// Copied from Dart SDK
@@ -186,7 +186,7 @@ class _UserReviewFutureProviderElement
   String get productId => (origin as UserReviewFutureProvider).productId;
 }
 
-String _$userReviewStreamHash() => r'a2ba31997d0122483ae686b9942cb555c69801f7';
+String _$userReviewStreamHash() => r'929c44de465ca195cb9f12203943b7bb4bdfda26';
 
 /// Check if a product was previously reviewed by the user
 ///

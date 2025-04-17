@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:e_shop/src/common_widgets/async_value_widget.dart';
 import 'package:e_shop/src/features/cart/presentation/shopping_cart/shopping_cart_screen_controller.dart';
-import 'package:e_shop/src/features/products/data/fake_products_repository.dart';
+import 'package:e_shop/src/features/products/data/products_repository.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';
 import 'package:e_shop/src/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';

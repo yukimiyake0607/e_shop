@@ -1,5 +1,5 @@
 import 'package:e_shop/src/constants/breakpoints.dart';
-import 'package:e_shop/src/features/authentication/data/fake_auth_repository.dart';
+import 'package:e_shop/src/features/authentication/data/auth_repository.dart';
 import 'package:e_shop/src/features/products/presentation/home_app_bar/more_menu_button.dart';
 import 'package:e_shop/src/features/products/presentation/home_app_bar/shopping_cart_icon.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';
