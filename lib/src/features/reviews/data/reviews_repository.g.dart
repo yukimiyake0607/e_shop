@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fake_reviews_repository.dart';
+part of 'reviews_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$reviewsRepositoryHash() => r'1aec8640920362c805ceb2e490827cff524cad7a';
+String _$reviewsRepositoryHash() => r'72f5c5df0aa7004d5dcaee2a51698dafbd241a24';
 
 /// See also [reviewsRepository].
 @ProviderFor(reviewsRepository)
-final reviewsRepositoryProvider = Provider<FakeReviewsRepository>.internal(
+final reviewsRepositoryProvider = Provider<ReviewsRepository>.internal(
   reviewsRepository,
   name: r'reviewsRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,7 @@ final reviewsRepositoryProvider = Provider<FakeReviewsRepository>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ReviewsRepositoryRef = ProviderRef<FakeReviewsRepository>;
+typedef ReviewsRepositoryRef = ProviderRef<ReviewsRepository>;
 String _$productReviewsHash() => r'9366dc5fa27dc221f31bc3692616e8c0a0641028';
 
 /// Copied from Dart SDK

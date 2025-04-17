@@ -1,14 +1,11 @@
 import 'package:e_shop/src/features/authentication/domain/app_user.dart';
+import 'package:e_shop/src/features/orders/data/orders_repository.dart';
 import 'package:e_shop/src/features/orders/domain/order.dart';
 import 'package:e_shop/src/features/products/domain/product.dart';
 import 'package:e_shop/src/utils/delay.dart';
 import 'package:e_shop/src/utils/in_memory_store.dart';
-import 'package:riverpod/riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'fake_orders_repository.g.dart';
-
-class FakeOrdersRepository {
+class FakeOrdersRepository implements OrdersRepository {
   FakeOrdersRepository({this.addDelay = true});
   final bool addDelay;
 
@@ -20,6 +17,7 @@ class FakeOrdersRepository {
   /// A stream that returns all the orders for a given user, ordered by date
   /// Only user orders that match the given productId will be returned.
   /// If a productId is not passed, all user orders will be returned.
+  @override
   Stream<List<Order>> watchUserOrders(UserID uid, {ProductID? productId}) {
     return _orders.stream.map((ordersData) {
       final ordersList = ordersData[uid] ?? [];
@@ -43,9 +41,4 @@ class FakeOrdersRepository {
     value[uid] = userOrders;
     _orders.value = value;
   }
-}
-
-@Riverpod(keepAlive: true)
-FakeOrdersRepository ordersRepository(Ref ref) {
-  return FakeOrdersRepository(addDelay: true);
 }

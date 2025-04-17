@@ -1,4 +1,4 @@
-import 'package:e_shop/src/features/authentication/data/fake_auth_repository.dart';
+import 'package:e_shop/src/features/authentication/data/auth_repository.dart';
 import 'package:e_shop/src/features/authentication/presentation/sign_in/email_password_sign_in_form_type.dart';
 import 'package:e_shop/src/features/authentication/presentation/sign_in/email_password_sign_in_screen.dart';
 import 'package:e_shop/src/features/checkout/presentation/payment/payment_page.dart';

@@ -1,6 +1,7 @@
 import 'package:e_shop/src/common_widgets/alert_dialogs.dart';
 import 'package:e_shop/src/common_widgets/custom_text_button.dart';
 import 'package:e_shop/src/common_widgets/primary_button.dart';
+import 'package:e_shop/src/features/authentication/data/auth_repository.dart';
 import 'package:e_shop/src/features/authentication/data/fake_auth_repository.dart';
 import 'package:e_shop/src/features/authentication/presentation/account/account_screen.dart';
 import 'package:e_shop/src/features/authentication/presentation/sign_in/email_password_sign_in_form_type.dart';

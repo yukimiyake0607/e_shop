@@ -2,7 +2,11 @@ typedef UserID = String;
 
 /// Simple class representing the user UID and email.
 class AppUser {
-  const AppUser({required this.uid, this.email, this.emailVerified = false});
+  const AppUser({
+    required this.uid,
+    this.email,
+    this.emailVerified = false,
+  });
   final UserID uid;
   final String? email;
   final bool emailVerified;

@@ -1,6 +1,6 @@
 import 'package:e_shop/src/common_widgets/async_value_widget.dart';
 import 'package:e_shop/src/features/cart/presentation/add_to_cart/add_to_cart_widget.dart';
-import 'package:e_shop/src/features/products/data/fake_products_repository.dart';
+import 'package:e_shop/src/features/products/data/products_repository.dart';
 import 'package:e_shop/src/features/products/presentation/home_app_bar/home_app_bar.dart';
 import 'package:e_shop/src/features/products/presentation/product_screen/leave_review_action.dart';
 import 'package:e_shop/src/features/products/presentation/product_screen/product_average_rating.dart';

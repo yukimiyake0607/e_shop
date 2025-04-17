@@ -1,5 +1,5 @@
 import 'package:e_shop/src/features/products/domain/product.dart';
-import 'package:e_shop/src/features/reviews/application/fake_reviews_service.dart';
+import 'package:e_shop/src/features/reviews/application/reviews_service.dart';
 import 'package:e_shop/src/features/reviews/domain/review.dart';
 import 'package:e_shop/src/utils/current_date_provider.dart';
 import 'package:e_shop/src/utils/notifier_mounted.dart';

@@ -1,6 +1,6 @@
 import 'package:e_shop/src/features/orders/application/user_orders_provider.dart';
 import 'package:e_shop/src/features/products/domain/product.dart';
-import 'package:e_shop/src/features/reviews/application/fake_reviews_service.dart';
+import 'package:e_shop/src/features/reviews/application/reviews_service.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';
 import 'package:e_shop/src/routing/app_router.dart';
 import 'package:e_shop/src/utils/date_formatter.dart';

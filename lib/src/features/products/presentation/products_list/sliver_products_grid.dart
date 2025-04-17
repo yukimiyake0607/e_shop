@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:e_shop/src/common_widgets/async_value_widget.dart';
 import 'package:e_shop/src/constants/breakpoints.dart';
-import 'package:e_shop/src/features/products/data/fake_products_repository.dart';
+import 'package:e_shop/src/features/products/data/products_repository.dart';
 import 'package:e_shop/src/features/products/domain/product.dart';
 import 'package:e_shop/src/features/products/presentation/products_list/product_card.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';

@@ -1,7 +1,7 @@
 import 'package:e_shop/src/common_widgets/async_value_widget.dart';
 import 'package:e_shop/src/constants/breakpoints.dart';
 import 'package:e_shop/src/features/products/domain/product.dart';
-import 'package:e_shop/src/features/reviews/application/fake_reviews_service.dart';
+import 'package:e_shop/src/features/reviews/application/reviews_service.dart';
 import 'package:e_shop/src/features/reviews/presentation/leave_review_screen/leave_review_controller.dart';
 import 'package:e_shop/src/features/reviews/presentation/product_reviews/product_rating_bar.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';

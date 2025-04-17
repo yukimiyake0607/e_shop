@@ -1,5 +1,5 @@
 import 'package:e_shop/src/common_widgets/alert_dialogs.dart';
-import 'package:e_shop/src/features/authentication/data/fake_auth_repository.dart';
+import 'package:e_shop/src/features/authentication/data/auth_repository.dart';
 import 'package:e_shop/src/features/authentication/presentation/account/account_screen_controller.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';
 import 'package:e_shop/src/utils/async_value_ui.dart';
