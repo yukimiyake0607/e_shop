@@ -10,27 +10,24 @@ part 'auth_repository.g.dart';
 class AuthRepository {
   final FirebaseAuth _firebaseAuth;
 
-  AuthRepository({required FirebaseAuth firebaseAuth})
-    : _firebaseAuth = firebaseAuth;
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    await _firebaseAuth.signInWithEmailAndPassword(
+  AuthRepository(this._firebaseAuth);
+
+  Future<void> signInWithEmailAndPassword(String email, String password) {
+    return _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<void> createUserWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    await _firebaseAuth.createUserWithEmailAndPassword(
+  Future<void> createUserWithEmailAndPassword(String email, String password) {
+    return _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
+  Future<void> signOut() {
+    return _firebaseAuth.signOut();
   }
 
   Stream<AppUser?> authStateChanges() {
@@ -55,7 +52,7 @@ class AuthRepository {
 
 @Riverpod(keepAlive: true)
 AuthRepository authRepository(Ref ref) {
-  return AuthRepository(firebaseAuth: FirebaseAuth.instance);
+  return AuthRepository(FirebaseAuth.instance);
 }
 
 // * Using keepAlive since other providers need it to be an
