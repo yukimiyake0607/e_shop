@@ -1,53 +1,41 @@
 import 'dart:async';
 
+import 'package:e_shop/src/features/authentication/data/firebase_app_user.dart';
 import 'package:e_shop/src/features/authentication/domain/app_user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_repository.g.dart';
 
 class AuthRepository {
-  final FirebaseAuth _firebaseAuth;
-
-  AuthRepository(this._firebaseAuth);
+  AuthRepository(this._auth);
+  final FirebaseAuth _auth;
 
   Future<void> signInWithEmailAndPassword(String email, String password) {
-    return _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    return _auth.signInWithEmailAndPassword(email: email, password: password);
   }
 
   Future<void> createUserWithEmailAndPassword(String email, String password) {
-    return _firebaseAuth.createUserWithEmailAndPassword(
+    return _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
   Future<void> signOut() {
-    return _firebaseAuth.signOut();
+    return _auth.signOut();
   }
 
   Stream<AppUser?> authStateChanges() {
-    return _firebaseAuth.authStateChanges().map(_convertUser);
+    return _auth.authStateChanges().map(_convertUser);
   }
 
-  AppUser? get currentUser => _convertUser(_firebaseAuth.currentUser);
+  AppUser? get currentUser => _convertUser(_auth.currentUser);
 
-  AppUser? _convertUser(User? user) {
-    (user) {
-      return user != null
-          ? AppUser(
-            uid: user.uid,
-            email: user.email,
-            emailVerified: user.emailVerified,
-          )
-          : null;
-    };
-    return null;
-  }
+  /// Helper method to convert a [User] to an [AppUser]
+  AppUser? _convertUser(User? user) =>
+      user != null ? FirebaseAppUser(user) : null;
 }
 
 @Riverpod(keepAlive: true)

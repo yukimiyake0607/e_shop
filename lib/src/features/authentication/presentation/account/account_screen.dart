@@ -1,5 +1,6 @@
 import 'package:e_shop/src/common_widgets/alert_dialogs.dart';
 import 'package:e_shop/src/features/authentication/data/auth_repository.dart';
+import 'package:e_shop/src/features/authentication/domain/app_user.dart';
 import 'package:e_shop/src/features/authentication/presentation/account/account_screen_controller.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';
 import 'package:e_shop/src/utils/async_value_ui.dart';
@@ -73,7 +74,61 @@ class AccountScreenContents extends ConsumerWidget {
         Text(user.uid, style: Theme.of(context).textTheme.bodySmall),
         gapH32,
         Text(user.email ?? '', style: Theme.of(context).textTheme.titleMedium),
+        gapH16,
+        EmailVerificationWidget(user: user),
       ],
     );
+  }
+}
+
+class EmailVerificationWidget extends ConsumerWidget {
+  const EmailVerificationWidget({super.key, required this.user});
+  final AppUser user;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(accountScreenControllerProvider);
+    if (user.emailVerified == false) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          OutlinedButton(
+            onPressed:
+                state.isLoading
+                    ? null
+                    : () async {
+                      final success = await ref
+                          .read(accountScreenControllerProvider.notifier)
+                          .sendEmailVerification(user);
+                      if (success && context.mounted) {
+                        showAlertDialog(
+                          context: context,
+                          title: 'Sent - now check your email'.hardcoded,
+                        );
+                      }
+                    },
+            child: Text(
+              'Verify email'.hardcoded,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Verified'.hardcoded,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(color: Colors.green.shade700),
+          ),
+          gapW8,
+          Icon(Icons.check_circle, color: Colors.green.shade700),
+        ],
+      );
+    }
   }
 }

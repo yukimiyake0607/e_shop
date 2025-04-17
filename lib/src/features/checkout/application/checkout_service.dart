@@ -5,6 +5,7 @@ part 'checkout_service.g.dart';
 
 class CheckoutService {
   CheckoutService(this._ref);
+  // ignore: unused_field
   final Ref _ref;
 
   Future<void> placeOrder() {
