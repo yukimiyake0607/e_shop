@@ -16,8 +16,15 @@ class ImageUploadRepository {
     String assetPath,
     ProductID productId,
   ) async {
-    // TODO: Implement
-    throw UnimplementedError();
+    final byteData = await rootBundle.load(assetPath);
+
+    final components = assetPath.split('/');
+    final fileName = components[2];
+    // Firebase Storageにアップロード
+    final result = await _uploadAsset(byteData, fileName);
+
+    // アップロードが完了したら、ダウンロードURLを取得
+    return result.ref.getDownloadURL();
   }
 
   UploadTask _uploadAsset(ByteData byteData, String filename) {
