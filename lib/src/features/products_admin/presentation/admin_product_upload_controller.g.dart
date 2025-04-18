@@ -7,7 +7,7 @@ part of 'admin_product_upload_controller.dart';
 // **************************************************************************
 
 String _$adminProductUploadControllerHash() =>
-    r'46b2b1472f92efdfba06b11e34c6cf09f5340cfe';
+    r'15e2c67290aa554d75c956b1a81aabb35484cc24';
 
 /// See also [AdminProductUploadController].
 @ProviderFor(AdminProductUploadController)

@@ -16,14 +16,17 @@ class ImageUploadRepository {
     String assetPath,
     ProductID productId,
   ) async {
+    // load asset byte data from bundle
     final byteData = await rootBundle.load(assetPath);
 
+    // Extract filename
+    // Example name: assets/products/bruschetta-plate.jpg
     final components = assetPath.split('/');
-    final fileName = components[2];
-    // Firebase Storageにアップロード
-    final result = await _uploadAsset(byteData, fileName);
+    final filename = components[2];
+    // upload to Firebase Storage
+    final result = await _uploadAsset(byteData, filename);
 
-    // アップロードが完了したら、ダウンロードURLを取得
+    // return download URL
     return result.ref.getDownloadURL();
   }
 
