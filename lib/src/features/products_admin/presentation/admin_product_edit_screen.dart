@@ -10,8 +10,10 @@ import 'package:e_shop/src/constants/app_sizes.dart';
 import 'package:e_shop/src/features/products/data/products_repository.dart';
 import 'package:e_shop/src/features/products/domain/product.dart';
 import 'package:e_shop/src/features/products_admin/data/template_products_providers.dart';
+import 'package:e_shop/src/features/products_admin/presentation/admin_product_edit_controller.dart';
 import 'package:e_shop/src/features/products_admin/presentation/product_validator.dart';
 import 'package:e_shop/src/localization/string_hardcoded.dart';
+import 'package:e_shop/src/utils/async_value_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -109,40 +111,33 @@ class _AdminProductScreenContentsState
 
   Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
-      await showAlertDialog(
-        context: context,
-        title: 'Not implemented'.hardcoded,
-      );
-      // TODO: Uncomment
-      // final scaffoldMessenger = ScaffoldMessenger.of(context);
-      // await ref.read(adminProductEditControllerProvider.notifier).updateProduct(
-      //       product: product,
-      //       title: _titleController.text,
-      //       description: _descriptionController.text,
-      //       price: _priceController.text,
-      //       availableQuantity: _availableQuantityController.text,
-      //     );
-      // // Inform the user that the product has been updated
-      // scaffoldMessenger.showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       'Product updated'.hardcoded,
-      //     ),
-      //   ),
-      // );
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      final success = await ref
+          .read(adminProductEditControllerProvider.notifier)
+          .updateProduct(
+            product: product,
+            title: _titleController.text,
+            description: _descriptionController.text,
+            price: _priceController.text,
+            availableQuantity: _availableQuantityController.text,
+          );
+      // Inform the user that the product has been updated
+      if (success) {
+        scaffoldMessenger.showSnackBar(
+          SnackBar(content: Text('Product updated'.hardcoded)),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Uncomment
-    // ref.listen<AsyncValue>(
-    //   adminProductEditControllerProvider,
-    //   (_, state) => state.showAlertDialogOnError(context),
-    // );
-    // final state = ref.watch(adminProductEditControllerProvider);
-    // final isLoading = state.isLoading;
-    const isLoading = false;
+    ref.listen<AsyncValue>(
+      adminProductEditControllerProvider,
+      (_, state) => state.showAlertDialogOnError(context),
+    );
+    final state = ref.watch(adminProductEditControllerProvider);
+    final isLoading = state.isLoading;
     const autovalidateMode = AutovalidateMode.disabled;
     return Scaffold(
       appBar: AppBar(

@@ -59,7 +59,11 @@ class ProductsRepository {
   // * Temporary search implementation.
   // * Note: this is quite inefficient as it pulls the entire product list
   // * and then filters the data on the client
-  // TODO: Update
+  Future<void> updateProduct(Product product) {
+    final ref = _productRef(product.id);
+    return ref.set(product);
+  }
+
   Future<List<Product>> searchProducts(String query) async {
     // 1. Get all products from Firestore
     final productsList = await fetchProductsList();
