@@ -28,6 +28,12 @@ class ProductsRepository {
     );
   }
 
+  Future<Product?> fetchProduct(ProductID id) async {
+    final ref = _productRef(id);
+    final snapshot = await ref.get();
+    return snapshot.data();
+  }
+
   Stream<Product?> watchProduct(ProductID id) {
     final ref = _productRef(id);
     return ref.snapshots().map((snapshot) => snapshot.data());
@@ -39,6 +45,15 @@ class ProductsRepository {
       // use merge: true to keep old fields (if any)
       SetOptions(merge: true),
     );
+  }
+
+  Future<void> updateProduct(Product product) {
+    final ref = _productRef(product.id);
+    return ref.set(product);
+  }
+
+  Future<void> deleteProduct(ProductID id) {
+    return _firestore.doc(productPath(id)).delete();
   }
 
   DocumentReference<Product> _productRef(ProductID id) => _firestore
@@ -56,15 +71,10 @@ class ProductsRepository {
       )
       .orderBy('id');
 
-  Future<void> updateProduct(Product product) {
-    final ref = _productRef(product.id);
-    return ref.set(product);
-  }
-
-  Future<void> deleteProduct(ProductID id) {
-    return _firestore.doc(productPath(id)).delete();
-  }
-
+  // * Temporary search implementation.
+  // * Note: this is quite inefficient as it pulls the entire product list
+  // * and then filters the data on the client
+  // TODO: Update
   Future<List<Product>> searchProducts(String query) async {
     // 1. Get all products from Firestore
     final productsList = await fetchProductsList();
@@ -96,9 +106,15 @@ Future<List<Product>> productsListFuture(Ref ref) {
 }
 
 @riverpod
-Stream<Product?> product(Ref ref, ProductID id) {
+Stream<Product?> productStream(Ref ref, ProductID id) {
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.watchProduct(id);
+}
+
+@riverpod
+Future<Product?> productFuture(Ref ref, ProductID id) {
+  final productsRepository = ref.watch(productsRepositoryProvider);
+  return productsRepository.fetchProduct(id);
 }
 
 @riverpod

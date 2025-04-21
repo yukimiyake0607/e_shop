@@ -1,6 +1,5 @@
 import 'package:e_shop/src/common_widgets/action_text_button.dart';
 import 'package:e_shop/src/common_widgets/alert_dialogs.dart';
-import 'package:e_shop/src/common_widgets/async_value_widget.dart';
 import 'package:e_shop/src/common_widgets/custom_image.dart';
 import 'package:e_shop/src/common_widgets/custom_text_button.dart';
 import 'package:e_shop/src/common_widgets/error_message_widget.dart';
@@ -25,9 +24,12 @@ class AdminProductEditScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productValue = ref.watch(productProvider(productId));
-    return AsyncValueWidget<Product?>(
-      value: productValue,
+    // * By watching a [FutureProvider], the data is only loaded once.
+    // * This prevents unintended rebuilds while the user is entering form data
+    final productValue = ref.watch(productFutureProvider(productId));
+    // * Using .when rather than [AsyncValueWidget] to provide custom error and
+    // * loading screens
+    return productValue.when(
       data:
           (product) =>
               product != null
@@ -38,6 +40,14 @@ class AdminProductEditScreen extends ConsumerWidget {
                       child: ErrorMessageWidget('Product not found'.hardcoded),
                     ),
                   ),
+      // * to prevent a black screen, return a [Scaffold] from the error and
+      // * loading screens
+      error:
+          (e, st) =>
+              Scaffold(body: Center(child: ErrorMessageWidget(e.toString()))),
+      loading:
+          () =>
+              const Scaffold(body: Center(child: CircularProgressIndicator())),
     );
   }
 }
@@ -119,8 +129,8 @@ class _AdminProductScreenContentsState
             price: _priceController.text,
             availableQuantity: _availableQuantityController.text,
           );
-      // Inform the user that the product has been updated
       if (success) {
+        // Inform the user that the product has been updated
         scaffoldMessenger.showSnackBar(
           SnackBar(content: Text('Product updated'.hardcoded)),
         );

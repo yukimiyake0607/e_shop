@@ -23,11 +23,12 @@ class ImageUploadService {
   }
 
   Future<void> deleteProduct(Product product) async {
-    // storageから画像を削除
+    // delete image from storage
     await ref
         .read(imageUploadRepositoryProvider)
         .deleteProductImage(product.imageUrl);
 
+    // delete product from Firestore
     await ref.read(productsRepositoryProvider).deleteProduct(product.id);
   }
 }
