@@ -34,6 +34,12 @@ class FakeProductsRepository implements ProductsRepository {
 
   // Retrieve a specific product by ID
   @override
+  Future<Product?> fetchProduct(String id) {
+    return Future.value(_getProduct(_products.value, id));
+  }
+
+  // Retrieve a specific product by ID
+  @override
   Stream<Product?> watchProduct(String id) {
     return watchProductsList().map((products) => _getProduct(products, id));
   }
@@ -80,5 +86,23 @@ class FakeProductsRepository implements ProductsRepository {
     } catch (e) {
       return null;
     }
+  }
+
+  @override
+  Future<void> createProduct(ProductID id, String imageUrl) {
+    // TODO: implement createProduct
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateProduct(Product product) {
+    // TODO: implement updateProduct
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteProduct(ProductID id) {
+    // TODO: implement deleteProduct
+    throw UnimplementedError();
   }
 }

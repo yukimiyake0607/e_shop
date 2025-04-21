@@ -1,28 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_router.dart';
+part of 'image_upload_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$goRouterHash() => r'07cc58c657c585c5a605612751f105d722ef691a';
+String _$imageUploadServiceHash() =>
+    r'5f5f67780f1da91f481517fa84fe682195930a58';
 
-/// returns the GoRouter instance that defines all the routes in the app
-///
-/// Copied from [goRouter].
-@ProviderFor(goRouter)
-final goRouterProvider = AutoDisposeProvider<GoRouter>.internal(
-  goRouter,
-  name: r'goRouterProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$goRouterHash,
+/// See also [imageUploadService].
+@ProviderFor(imageUploadService)
+final imageUploadServiceProvider =
+    AutoDisposeProvider<ImageUploadService>.internal(
+  imageUploadService,
+  name: r'imageUploadServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$imageUploadServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GoRouterRef = AutoDisposeProviderRef<GoRouter>;
+typedef ImageUploadServiceRef = AutoDisposeProviderRef<ImageUploadService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
