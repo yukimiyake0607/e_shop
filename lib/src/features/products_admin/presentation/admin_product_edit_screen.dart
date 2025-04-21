@@ -94,19 +94,17 @@ class _AdminProductScreenContentsState
   }
 
   Future<void> _delete() async {
-    await showAlertDialog(context: context, title: 'Not implemented'.hardcoded);
-    // TODO: Uncomment
-    // final delete = await showAlertDialog(
-    //   context: context,
-    //   title: 'Are you sure?'.hardcoded,
-    //   cancelActionText: 'Cancel'.hardcoded,
-    //   defaultActionText: 'Delete'.hardcoded,
-    // );
-    // if (delete == true) {
-    //   ref
-    //       .read(adminProductEditControllerProvider.notifier)
-    //       .deleteProduct(product);
-    // }
+    final delete = await showAlertDialog(
+      context: context,
+      title: 'Are you sure?'.hardcoded,
+      cancelActionText: 'Cancel'.hardcoded,
+      defaultActionText: 'Delete'.hardcoded,
+    );
+    if (delete == true) {
+      ref
+          .read(adminProductEditControllerProvider.notifier)
+          .deleteProduct(product);
+    }
   }
 
   Future<void> _submit() async {

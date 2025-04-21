@@ -38,6 +38,10 @@ class ImageUploadRepository {
     final ref = _storage.ref('products/$filename');
     return ref.putData(bytes, SettableMetadata(contentType: 'image/jpeg'));
   }
+
+  Future<void> deleteProductImage(String imageUrl) async {
+    return _storage.refFromURL(imageUrl).delete();
+  }
 }
 
 @riverpod

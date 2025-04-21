@@ -21,9 +21,18 @@ class ImageUploadService {
         .read(productsRepositoryProvider)
         .createProduct(product.id, downloadUrl);
   }
+
+  Future<void> deleteProduct(Product product) async {
+    // storageから画像を削除
+    await ref
+        .read(imageUploadRepositoryProvider)
+        .deleteProductImage(product.imageUrl);
+
+    await ref.read(productsRepositoryProvider).deleteProduct(product.id);
+  }
 }
 
 @riverpod
-ImageUploadService imageUploadService(ImageUploadServiceRef ref) {
+ImageUploadService imageUploadService(Ref ref) {
   return ImageUploadService(ref);
 }

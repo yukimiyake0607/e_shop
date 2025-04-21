@@ -56,12 +56,13 @@ class ProductsRepository {
       )
       .orderBy('id');
 
-  // * Temporary search implementation.
-  // * Note: this is quite inefficient as it pulls the entire product list
-  // * and then filters the data on the client
   Future<void> updateProduct(Product product) {
     final ref = _productRef(product.id);
     return ref.set(product);
+  }
+
+  Future<void> deleteProduct(ProductID id) {
+    return _firestore.doc(productPath(id)).delete();
   }
 
   Future<List<Product>> searchProducts(String query) async {
