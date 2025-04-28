@@ -1,4 +1,5 @@
 import 'package:e_shop/src/app.dart';
+import 'package:e_shop/src/app_bootstrap.dart';
 import 'package:e_shop/src/app_bootstrap_fakes.dart';
 import 'package:e_shop/src/features/cart/application/cart_sync_service.dart';
 import 'package:e_shop/src/features/products/presentation/home_app_bar/more_menu_button.dart';
@@ -31,7 +32,10 @@ class Robot {
   final GoldenRobot golden;
 
   Future<void> pumpMyAppWithFakes() async {
-    final container = await createFakesProviderContainer(addDelay: false);
+    final appBootstrap = AppBootstrap();
+    final container = await appBootstrap.createFakesProviderContainer(
+      addDelay: false,
+    );
     // * Initialize CartSyncService to start the listener
     container.read(cartSyncServiceProvider);
     // * Entry point of the app

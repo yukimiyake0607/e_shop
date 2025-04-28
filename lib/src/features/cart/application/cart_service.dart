@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:e_shop/src/features/authentication/data/auth_repository.dart';
 import 'package:e_shop/src/features/cart/data/local/local_cart_repository.dart';
 import 'package:e_shop/src/features/cart/data/remote/remote_cart_repository.dart';
@@ -8,7 +9,7 @@ import 'package:e_shop/src/features/cart/domain/item.dart';
 import 'package:e_shop/src/features/cart/domain/mutable_cart.dart';
 import 'package:e_shop/src/features/products/data/products_repository.dart';
 import 'package:e_shop/src/features/products/domain/product.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'cart_service.g.dart';
@@ -91,16 +92,18 @@ int cartItemsCount(Ref ref) {
 }
 
 @riverpod
-double cartTotal(Ref ref) {
-  final cart = ref.watch(cartProvider).value ?? const Cart();
-  final productsList = ref.watch(productsListStreamProvider).value ?? [];
+Future<double> cartTotal(Ref ref) async {
+  final cart = await ref.watch(cartProvider.future);
+  final productsList = await ref.watch(productsListStreamProvider.future);
   if (cart.items.isNotEmpty && productsList.isNotEmpty) {
     var total = 0.0;
     for (final item in cart.items.entries) {
-      final product = productsList.firstWhere(
+      final product = productsList.firstWhereOrNull(
         (product) => product.id == item.key,
       );
-      total += product.price * item.value;
+      if (product != null) {
+        total += product.price * item.value;
+      }
     }
     return total;
   } else {

@@ -1,7 +1,7 @@
-import 'package:e_shop/src/features/products/data/products_repository.dart';
 import 'package:e_shop/src/features/products/data/test_products.dart';
 import 'package:e_shop/src/features/cart/application/cart_service.dart';
 import 'package:e_shop/src/features/cart/domain/cart.dart';
+import 'package:e_shop/src/features/products/data/products_repository.dart';
 import 'package:e_shop/src/features/products/domain/product.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,9 +27,9 @@ void main() {
         cart: const Stream.empty(),
         products: Stream.value(kTestProducts),
       );
-      await container.read(productsListStreamProvider.future);
+      // Read the provider before the dependant providers have emitted a value
       final total = container.read(cartTotalProvider);
-      expect(total, 0);
+      expect(total, const AsyncLoading<double>());
     });
 
     test('empty cart', () async {
@@ -39,7 +39,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 0);
     });
 
@@ -50,7 +50,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 15);
     });
 
@@ -61,7 +61,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 75);
     });
 
@@ -72,7 +72,7 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      final total = container.read(cartTotalProvider);
+      final total = await container.read(cartTotalProvider.future);
       expect(total, 69); // 15 * 2 + 13 * 3
     });
 
@@ -83,7 +83,8 @@ void main() {
       );
       await container.read(cartProvider.future);
       await container.read(productsListStreamProvider.future);
-      expect(() => container.read(cartTotalProvider), throwsStateError);
+      final total = await container.read(cartTotalProvider.future);
+      expect(total, 0);
     });
   });
 }
