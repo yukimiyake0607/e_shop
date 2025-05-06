@@ -10,14 +10,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // turn off the # in the URLs on the web
+  // URL内の#を削除する
   usePathUrlStrategy();
-  // create an app bootstrap instance
+  // appBootstrapのインスタンスを作成
   final appBootstrap = AppBootstrap();
-  // create a container configured with all the "fake" repositories
+  // 全ての「フェイクリポジトリ」で構成されたコンテナを作成
   final container = await appBootstrap.createFirebaseProviderContainer();
-  // use the container above to create the root widget
+  // 上記のコンテナを使用してルートウィジェットを作成
   final root = appBootstrap.createRootWidget(container: container);
-  // start the app
+  // アプリを起動
   runApp(root);
 }
